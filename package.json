@@ -1,0 +1,24 @@
+{
+  "name": "demo-nodejs-typescript-core",
+  "version": "1.0.0",
+  "description": "Demo nodejs core with typescript",
+  "main": "server.ts",
+  "author": "NDK1996",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "nodemon --exec 'node --env-file .env -r ts-node/register' src/server.ts",
+    "lint": "eslint"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.8.0",
+    "@tsconfig/recommended": "^1.0.7",
+    "@types/eslint__js": "^8.42.3",
+    "@types/node": "^22.1.0",
+    "eslint": "9.x",
+    "globals": "^15.9.0",
+    "nodemon": "^3.1.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.0.1"
+  }
+}
