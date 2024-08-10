@@ -1,5 +1,5 @@
-import globals from "globals";
 import pluginJs from "@eslint/js";
+import globals from "globals";
 import tseslint from "typescript-eslint";
 
 
@@ -7,6 +7,7 @@ export default [
   {
     files: ["src/**/*.{js,mjs,cjs,ts}"],
     rules: {
+      "max-len": ["error", { "code": 160 }],
       "no-console": ["warn", { allow: ["warn", "error", "clear"] }],
       "no-debugger": "error",
       "no-dupe-keys": "error",
@@ -27,6 +28,7 @@ export default [
       "keyword-spacing": "error",
       "space-infix-ops": "error",
       "prefer-const": "error",
+      "quotes": ["error", "single"],
       "semi": [
         "error",
         "always"
