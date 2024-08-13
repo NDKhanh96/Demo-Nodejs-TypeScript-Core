@@ -43,7 +43,7 @@ This repository content demo project of nodejs using TypeScript.
       "exclude": ["node_modules"]
     }
     ```
-    Bất kỳ thuộc tính nào có trong tệp `tsconfig.json` bên ngoài sẽ ghi đè lên thuộc tính tương ứng trong tệp `tsconfig.json` trong module node. Ví dụ, nếu tệp của module có `"lib": ["es2016"]`, nó sẽ bị ghi đè thành `"lib": ["es2020"]` trong tệp bên ngoài. Nếu tệp của module có `"strict": true`, và tệp bên ngoài không có nó, tệp bên ngoài sẽ không ghi đè lên và vẫn sử dụng `"strict": true` từ tệp của module.
+    Bất kỳ thuộc tính nào có trong tệp `tsconfig.json` bên ngoài sẽ ghi đè lên thuộc tính tương ứng trong tệp `tsconfig.json` trong node_modules. Ví dụ, nếu tệp của node_modules có `"lib": ["es2016"]`, nó sẽ bị ghi đè thành `"lib": ["es2020"]` trong tệp bên ngoài. Nếu tệp của module có `"strict": true`, và tệp bên ngoài không có nó, tệp bên ngoài sẽ không ghi đè lên và vẫn sử dụng `"strict": true` từ tệp của node_modules.
 
 5. Thêm định nghĩa TypeScript cho Node.js bằng cách chạy lệnh:
     ```
@@ -61,7 +61,7 @@ Có hai cách để kích hoạt hot reload:
 ```
 yarn add -D ts-node-dev
 ```
-Vì tùy chọn `--watch` trong Node.js không hoạt động với TypeScript và `nodemon` yêu cầu `ts-node`, `ts-node-dev` là một lựa chọn tốt cho hot reload.
+Vì tùy chọn `--watch` trong Node.js không hoạt động với TypeScript và `nodemon` yêu cầu `ts-node`, do đó `ts-node-dev` là một lựa chọn tốt cho hot reload.
 
 Tiếp theo, thêm lệnh sau vào phần `"scripts"` của tệp `package.json`:
 ```json
@@ -136,9 +136,9 @@ Phương pháp 2 (Sử dụng `ts-node` và `nodemon`):
 
 Nếu Visual Studio Code vẫn không hiển thị lỗi ESLint hoặc định dạng khi lưu sau khi hoàn thành cài đặt ESLint, hãy thử các bước sau theo thứ tự:
 
-1. Tải lại Visual Studio Code.
-2. Nhấp chuột phải vào mã và chọn "Format Document With..." > "ESLint", sau đó tải lại Visual Studio Code.
-3. Thêm cấu hình sau vào tệp `settings.json` của không gian làm việc, sau đó tải lại Visual Studio Code:
+1. Reload Visual Studio Code.
+2. Nhấp chuột phải vào mã và chọn "Format Document With..." > "ESLint", sau đó reload lại Visual Studio Code.
+3. Thêm cấu hình sau vào tệp `settings.json` của workspace (file .vscode), sau đó reload lại Visual Studio Code:
     ```json
     {
          "editor.codeActionsOnSave": {
