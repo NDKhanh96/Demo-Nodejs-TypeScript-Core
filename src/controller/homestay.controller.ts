@@ -28,7 +28,15 @@ export class HomestayController extends BaseController {
 
     async getListHomestayPage(req: IncomingMessage, res: ServerResponse): Promise<void> {
         this.notImplementedNotGetMethod(req, res);
-        const homestayData: HomestayWithCity[] = await this.homestayModel.getAll();
+        const homestayData: HomestayWithCity[] | void = await this.homestayModel.getAll().catch((error: string) => {
+            res.writeHead(500, { 'Content-Type': 'text/plain' });
+            res.write(error);
+            res.end();
+        });
+
+        if (!homestayData) {
+            return;
+        }
         let newHtml: string = '';
 
         homestayData.forEach((homestay: HomestayWithCity, index: number): void => {
@@ -68,7 +76,15 @@ export class HomestayController extends BaseController {
             return;
         }
 
-        const data: HomestayWithCity[] = await this.homestayModel.getHomestayById(Number(queryParams.id));
+        const data: HomestayWithCity[] | void = await this.homestayModel.getHomestayById(Number(queryParams.id)).catch((error: string) => {
+            res.writeHead(500, { 'Content-Type': 'text/plain' });
+            res.write(error);
+            res.end();
+        });
+
+        if (!data) {
+            return;
+        }
 
         if (data.length === 0) {
             res.writeHead(404, { 'Content-Type': 'text/plain' });
@@ -100,7 +116,15 @@ export class HomestayController extends BaseController {
     async addHomestay(req: IncomingMessage, res: ServerResponse): Promise<void> {
         if (req.method === 'GET') {
             const htmlPath: string = join(__dirname, '../view/add.html');
-            const listCity: CityDAO[] = await this.cityModel.getAll();
+            const listCity: CityDAO[] | void = await this.cityModel.getAll().catch((error: string) => {
+                res.writeHead(500, { 'Content-Type': 'text/plain' });
+                res.write(error);
+                res.end();
+            });
+
+            if (!listCity) {
+                return;
+            }
             let html: string = await this.getHtml(req, res, htmlPath);
             let newHtml: string = '';
 
@@ -156,8 +180,20 @@ export class HomestayController extends BaseController {
         const queryParams: ParsedUrlQuery = url.parse(req.url as string, true).query;
 
         if (queryParams.id && req.method === 'GET') {
-            const listCity: CityDAO[] = await this.cityModel.getAll();
-            const data: HomestayWithCity[] = await this.homestayModel.getHomestayById(Number(queryParams.id));
+            const listCity: CityDAO[] | void = await this.cityModel.getAll().catch((error: string) => {
+                res.writeHead(500, { 'Content-Type': 'text/plain' });
+                res.write(error);
+                res.end();
+            });
+            const data: HomestayWithCity[] | void = await this.homestayModel.getHomestayById(Number(queryParams.id)).catch((error: string) => {
+                res.writeHead(500, { 'Content-Type': 'text/plain' });
+                res.write(error);
+                res.end();
+            });
+
+            if (!listCity || !data) {
+                return;
+            }
             const { name, num_bedroom, num_bathroom, price, description, city_id, city_name } = data[0];
             const htmlPath: string = join(__dirname, '../view/update.html');
             let html: string = await this.getHtml(req, res, htmlPath);
